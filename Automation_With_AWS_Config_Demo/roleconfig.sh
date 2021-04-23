@@ -21,7 +21,7 @@ iamRoleArn=$(aws iam create-role --role-name "MyAutomationRole" \
 aws iam attach-role-policy --role-name "MyAutomationRole" \
  --policy-arn "arn:aws:iam::aws:policy/service-role/AmazonSSMAutomationRole"
 aws iam put-role-policy --role-name "MyAutomationRole" \
- --policy-name “AllowPassRole” \
+ --policy-name "AllowPassRole" \
  --policy-document '{
     "Version": "2012-10-17",
     "Statement": [
