@@ -8,7 +8,7 @@
         "s3:GetObject"
       ],
       "Effect": "Allow",
-      "Resource": "arn:aws:s3:::INSERT_YOUR_BUCKE_NAME/*",
+      "Resource": "arn:aws:s3:::INSERT_YOUR_BUCKET_NAME/*",
       "Principal": "*"
     }
   ]
