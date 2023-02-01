@@ -10,7 +10,7 @@
         "Resource": "arn:aws:s3:::YOUR-BUCKET-NAME/*",
         "Condition": {
             "StringEquals": {
-                "AWS:SourceArn": "arn:aws:cloudfront::YOUR-ACCOUNT_NUMBER:distribution/YOUR-CF-DISTIBUTION-ID"
+                "AWS:SourceArn": "ARN-OF-YOUR-CF-DISTRIBUTION"
             }
         }
     }
