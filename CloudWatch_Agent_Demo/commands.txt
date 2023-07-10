@@ -1,24 +1,30 @@
 1. Bootstrap script: 
-#!/bin/bash
-yum update -y
+#!/bin/bash	
+dnf update -y	
 
-2. Install the CloudWatch Agent: 
-sudo yum install amazon-cloudwatch-agent -y
+2. Log in to the instance and install rsyslog, which will generate a readable text file of the operating system messages in /var/log/messages. 
 
-3. Configure the CloudWatch agent: 
-sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-config-wizard
+sudo su  
+dnf install rsyslog
+systemctl start rsyslog
+systemctl enable rsyslog
 
-**** Say no to monitoring CollectD ****
-**** Monitor /var/log/messages ****
+3. Install the CW Agent: 
+dnf install amazon-cloudwatch-agent -y
 
-4. cd /opt/aws/amazon-cloudwatch-agent/bin
-   /opt/aws/amazon-cloudwatch-agent/bin/config.json is the config file
+4. Configure the CW agent: 
+/opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-config-wizard
 
-5. Start the CloudWatch Agent
-sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/bin/config.json
+****Say no to monitoring CollectD****
+Monitor /var/log/messages
 
-6. Generate some activity on our system by installing stress - it’s in the Extra Packages for Enterprise Linux (EPEL) repository, so first we'll install the epel repository, then we'll install stress:
+5. View the CloudWatch agent config file:
+cd /opt/aws/amazon-cloudwatch-agent/bin
+cat config.json
 
-sudo amazon-linux-extras install epel -y
-sudo yum install stress -y
+6. Start the CloudWatch Agent
+/opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/bin/config.json
+
+7. Generate some activity on our system by installing stress:
+dnf install stress -y
 stress --cpu 1
