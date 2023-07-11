@@ -3,4 +3,4 @@ dnf update -y
 dnf install httpd -y
 echo "<html><body><h1>Hello Cloud Gurus</h1></body></html>" >/var/www/html/index.html
 systemctl enable httpd
-systemscl start httpd
+systemctl start httpd
